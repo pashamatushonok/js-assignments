@@ -2,8 +2,7 @@
 
 /**********************************************************************************************
  *                                                                                            *
- * Plese read the following tutorial before implementing tasks:                               *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions                    *
+ * Plese read the following tutorial before implementing tasks                                *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function  *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments      *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures                           *
@@ -26,7 +25,7 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+	return x => f(g(x));
 }
 
 
@@ -47,7 +46,7 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return x => Math.pow(x, exponent);
 }
 
 
@@ -84,7 +83,19 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+	let memfunc;
+	let isfuncset = false;
+	
+	function setfunction(x){
+		if (!isfuncset){
+			isfuncset = true;
+			memfunc = func(x);
+			return memfunc;
+		}
+		return memfunc;
+	}
+	
+	return setfunction;
 }
 
 
@@ -104,7 +115,21 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-    throw new Error('Not implemented');
+    let i;
+	
+	function ret() {
+		while (attempts != 0) {
+			try {
+				i = func();
+			}
+			catch(err) {
+				attempts--;
+				continue;
+			}
+			return i;
+		}
+	}
+	return ret;
 }
 
 
